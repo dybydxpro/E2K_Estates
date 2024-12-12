@@ -1,0 +1,7 @@
+staticfiles/*
+.devcontainer/*
+*/dependabot.yml
+venv/*
+**/__pycache__/*
+
+.env
