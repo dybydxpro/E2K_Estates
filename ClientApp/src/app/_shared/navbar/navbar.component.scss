@@ -1,0 +1,53 @@
+.nav-bar {
+    height: 3.75rem;
+    background-color: transparent;
+    padding: 0 2.75rem;
+    position: sticky;
+    width: 100vw;
+
+    & > div {
+        height: 3.75rem;
+    }
+}
+
+.nav-logo {
+    height: 2.75rem;
+    width: 2.75rem;
+    filter: invert(1);
+}
+
+.nav_h {
+    height: 3.75rem;;
+}
+
+.margin-0 {
+    margin: 0 !important;
+}
+
+@media only screen and (max-width: 640px) {
+    .nav-bar {
+        height: 3.75rem;
+        background-color: transparent;
+        padding: 0 0.5rem;
+        position: sticky;
+        width: 100vw;
+    
+        & > div {
+            height: 3.75rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 780px) {
+    .nav-bar {
+        height: 3.75rem;
+        background-color: transparent;
+        padding: 0 1.375rem;
+        position: sticky;
+        width: 100vw;
+    
+        & > div {
+            height: 3.75rem;
+        }
+    }
+}
