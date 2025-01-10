@@ -8,7 +8,17 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
-import { MessageState } from './../state-mgt/states/message.state'
+import { MessageState } from './../state-mgt/states/message.state';
+import { HttpClientModule } from '@angular/common/http';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { GlobalOutline, SendOutline, RightCircleFill } from '@ant-design/icons-angular/icons';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
+const icons: IconDefinition[] = [
+  GlobalOutline,
+  SendOutline,
+  RightCircleFill
+];
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +29,8 @@ export const appConfig: ApplicationConfig = {
       NgxsModule.forRoot([MessageState]),
       NgxsStoragePluginModule.forRoot({ keys: '*' }),
       NgxsReduxDevtoolsPluginModule.forRoot(),
+      HttpClientModule,
+      NzIconModule.forRoot(icons),
       // NgxsLoggerPluginModule.forRoot(),
     ),
   ]

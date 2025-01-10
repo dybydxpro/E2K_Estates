@@ -1,13 +1,11 @@
 .nav-bar {
+    position: absolute;
     height: 3.75rem;
     background-color: transparent;
     padding: 0 2.75rem;
     position: sticky;
     width: 100vw;
-
-    & > div {
-        height: 3.75rem;
-    }
+    z-index: 10;
 }
 
 .nav-logo {

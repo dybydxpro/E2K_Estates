@@ -1,0 +1,108 @@
+.form {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 16px;
+}
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+  background-color: #eab308 !important;
+}
+
+.img {
+  max-height: 6rem;
+  max-width: 8rem;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  border-radius: 0.875rem !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.q1 {
+  width: 33.33333%;
+}
+
+.q2 {
+  width: 33.3333%;
+}
+
+.q3 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.q4 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.q5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.q6 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.q7 {
+  width: 33.33333%;
+}
+
+@media only screen and (max-width: 780px) {
+  .q1 {
+    width: 66.6666%;
+  }
+
+  .q2 {
+    width: 66.6666%;
+  }
+
+  .q3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .q4 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .q5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .q6 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .q7 {
+    width: 66.6666%;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .q1 {
+    width: 100%;
+  }
+
+  .q2 {
+    width: 100%;
+  }
+
+  .q3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .q4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .q5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .q6 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .q7 {
+    width: 100%;
+  }
+}
