@@ -1,7 +1,10 @@
 $base-colour: #0d9488;
 $prompt-font-color: #262626;
 
-$anime: linear-gradient(-45deg, #005660, #008081, #229389, #008081, #005660);
+// $anime: linear-gradient(-45deg, #005660, #008081, #229389, #008081, #005660);
+// $anime: linear-gradient(-45deg, #044178, #0d7894, #229389, #0d7894, #044178);
+// $anime: linear-gradient(-45deg, #eab308, #7aa316, #16a34a, #7aa316, #eab308);
+$anime: linear-gradient(-45deg, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff);
 
 @keyframes text_anime {
   0% {
@@ -17,9 +20,9 @@ $anime: linear-gradient(-45deg, #005660, #008081, #229389, #008081, #005660);
 }
 
 .home-top-seg {
-  position: relative;
-  height: 100vh;
-  background-image: url("./../../../../public/cool-houses.jpg");
+  min-height: 100vh;
+  height: auto;
+  background-image: url("./../../../../public/bg-image.jpg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -27,23 +30,15 @@ $anime: linear-gradient(-45deg, #005660, #008081, #229389, #008081, #005660);
   overflow-y: hidden;
   overflow-x: hidden;
   margin-bottom: 2rem;
-}
 
-.home-top-seg::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba($color: #000000, $alpha: 0.5
-  );
-  z-index: 1;
+  & > .home-top-seg-mask {
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    min-height: 100vh;
+    height: auto;
+  }
 }
 
 .scroll-body {
-  position: absolute;
-  z-index: 2;
 }
 
 .home-top-seg-form {

@@ -1,5 +1,6 @@
 <div #homePage class="page-content">
-    <div id="home" class="home-top-seg seg-height">
+  <div id="home" class="home-top-seg seg-height">
+    <div class="home-top-seg-mask">
       <div
         #pageBody
         [ngClass]="{
@@ -11,7 +12,7 @@
       >
         <div class="scroll-body">
           <app-navbar (startSession)="newSession()"></app-navbar>
-  
+
           <div
             [ngClass]="{
               'home-top-seg-form': true,
@@ -20,15 +21,17 @@
             }"
           >
             <div class="">
-              <p class="text-center font-medium text-white text-2xl py-8 sm:p-0">
-                Unlock the power of AI to help you find your perfect car.
+              <p
+                class="text-center font-medium text-white text-2xl py-8 sm:p-0"
+              >
+                Unlock the power of AI to help you find your perfect property.
               </p>
               <p
                 class="text-center font-extrabold text-white text-4xl py-16 font-sans"
               >
                 Welcome to
                 <span class="text-5xl font-sans ai-animation"
-                  >VehicleWise AI</span
+                  >PropertyWise AI</span
                 >
                 <br />
                 @if(isChatView === false) {
@@ -41,7 +44,7 @@
                 </button>
                 }
               </p>
-  
+
               @if (messages.length === 0 && isChatView == false) {
               <div class="flex lg:justify-center qestion_container lg:mb-4">
                 @for (item of questions; track item.id) {
@@ -65,10 +68,13 @@
           </div>
         </div>
       </div>
-  
+
       @if(messages.length !== 0) {
       <div
-        [ngClass]="{ 'flex justify-center mx-auto': true, 'show-textarea': true }"
+        [ngClass]="{
+          'flex justify-center mx-auto': true,
+          'show-textarea': true
+        }"
       >
         <div>
           <div class="flex w-full prompt-form">
@@ -106,18 +112,19 @@
       }
     </div>
   </div>
-  
-  <div class="nav-btn">
-    <span
-      nz-icon
-      nzType="double-right"
-      nzTheme="outline"
-      (click)="selectSegment('scroll-body', 'start')"
-    ></span>
-    <span
-      nz-icon
-      nzType="double-right"
-      nzTheme="outline"
-      (click)="selectSegment('scroll-body', 'end')"
-    ></span>
-  </div>
+</div>
+
+<div class="nav-btn">
+  <span
+    nz-icon
+    nzType="double-right"
+    nzTheme="outline"
+    (click)="selectSegment('scroll-body', 'start')"
+  ></span>
+  <span
+    nz-icon
+    nzType="double-right"
+    nzTheme="outline"
+    (click)="selectSegment('scroll-body', 'end')"
+  ></span>
+</div>

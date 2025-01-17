@@ -65,7 +65,7 @@ export class HomeComponent {
       {
         id: 1,
         question:
-          'I want an affordable, easy-to-drive car for my first vehicle',
+          'Question 1',
         config: [
           { forcus: 'condition', value: 'Used' },
           { forcus: 'type', value: 'Hatchback' },
@@ -75,7 +75,7 @@ export class HomeComponent {
       },
       {
         id: 2,
-        question: "What's the best electric car under 40k?",
+        question: "Question 2",
         config: [
           { forcus: 'fuelType', value: 'Electric' },
           { forcus: 'budget', value: '$20,000 - $40,000' },
@@ -83,7 +83,7 @@ export class HomeComponent {
       },
       {
         id: 3,
-        question: 'What is the best daily small car for work commuting?',
+        question: 'Question 3',
         config: [
           { forcus: 'type', value: 'Hatchback' },
           { forcus: 'budget', value: '$20,000 - $40,000' },
@@ -96,7 +96,7 @@ export class HomeComponent {
       {
         id: 4,
         question:
-          'I need a spacious and safe SUV to accommodate my growing family and long road trips',
+          'Question 4',
         config: [
           { forcus: 'type', value: 'SUV' },
           { forcus: 'purpose', value: 'Family activities & Road Trips' },
