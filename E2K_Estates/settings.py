@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'E2K_Properties.urls'
+ROOT_URLCONF = 'E2K_Estates.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'E2K_Properties.wsgi.application'
+WSGI_APPLICATION = 'E2K_Estates.wsgi.application'
 
 
 # Database
