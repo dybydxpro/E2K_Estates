@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-c__*2od5nsskh2ev5vts4mpyszz_=)hbdjbv4zczmy=9l7u^cl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django_injector',
     'corsheaders',
     'channels',
-    'E2K_WebApi.apps.E2KWebApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -53,12 +52,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'E2K_Properties.urls'
+ROOT_URLCONF = 'E2K_Estates.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "staticfiles")],
+        'DIRS': [BASE_DIR / 'staticfiles']
+        ,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,8 +71,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'E2K_Properties.wsgi.application'
-ASGI_APPLICATION = 'E2K_Properties.asgi.application'
+WSGI_APPLICATION = 'E2K_Estates.wsgi.application'
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -120,16 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "staticfiles"),
-]
-
-CORS_ALLOW_ALL_ORIGINS = True
-
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:4200',
-# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
