@@ -1,108 +1,309 @@
-.form {
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 16px;
+@mixin horizontal-scroll {
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 6px;
+    border: 0px solid #ffffff;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 6px;
+    z-index: 20;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
 }
 
-input[type="radio"]:checked,
-input[type="checkbox"]:checked {
-  background-color: #eab308 !important;
+.chat-wall {
+  width: calc(76rem - 4rem);
+  z-index: 2;
 }
 
-.img {
-  max-height: 6rem;
-  max-width: 8rem;
-  height: auto;
-  width: auto;
-  object-fit: contain;
-  border-radius: 0.875rem !important;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+.chat-wall-size {
+  padding-bottom: 5rem;
 }
 
-.q1 {
-  width: 33.33333%;
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Arial", sans-serif;
 }
 
-.q2 {
-  width: 33.3333%;
+.bubble {
+  max-width: 100%;
+  padding: 0.5rem 1.5rem;
+  border-radius: 15px;
+  line-height: 1.4;
+  position: relative;
+  word-wrap: break-word;
+  text-align: justify;
+  text-justify: inter-word;
+  margin-bottom: 0.75rem;
+
+  p {
+    margin: 0;
+  }
+
+  &.assistant {
+    background-color: #fffffd;
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+    color: #333;
+    overflow-x: auto;
+    padding: 1rem 1.5rem !important;
+    @include horizontal-scroll;
+
+    & > p {
+      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 16px;
+    }
+  }
+
+  &.user {
+    background-color: #203b54;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+    color: #ffffff;
+    padding: 1rem 1.5rem !important;
+
+    & > p {
+      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 16px;
+    }
+
+    & > pre {
+      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 16px;
+      line-height: 1rem;
+    }
+  }
+
+  &.user-form {
+    background-color: #fffffd;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+    color: #333;
+
+    & > p {
+      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      font-size: 16px;
+    }
+  }
+
+  &.loading {
+    display: flex;
+    background-color: #fffffd;
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+    color: #333;
+    overflow-x: auto;
+  }
 }
 
-.q3 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
+@media only screen and (max-width: 1140px) {
+  .chat-wall {
+    width: calc(100vw - 4rem);
+  }
 
-.q4 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
+  .chat-wall-size {
+    padding-bottom: 10rem;
+  }
 
-.q5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    font-family: "Arial", sans-serif;
+  }
 
-.q6 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
+  .bubble {
+    max-width: 100%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    line-height: 1.4;
+    position: relative;
+    word-wrap: break-word;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 0.75rem;
 
-.q7 {
-  width: 33.33333%;
+    p {
+      margin: 0;
+    }
+
+    &.assistant {
+      background-color: #fffffd;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      color: #333;
+      overflow-x: auto;
+      @include horizontal-scroll;
+
+      & > p {
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 16px;
+      }
+    }
+
+    &.user {
+      background-color: #203b54;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+      color: #ffffff;
+
+      & > p {
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 16px;
+      }
+    }
+
+    &.loading {
+      background-color: #fffffd;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      color: #333;
+      overflow-x: auto;
+    }
+  }
 }
 
 @media only screen and (max-width: 780px) {
-  .q1 {
-    width: 66.6666%;
+  .chat-wall {
+    width: calc(100vw - 4rem);
   }
 
-  .q2 {
-    width: 66.6666%;
+  .chat-wall-size {
+    padding-bottom: 10rem;
   }
 
-  .q3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    font-family: "Arial", sans-serif;
   }
 
-  .q4 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  .bubble {
+    max-width: 100%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    line-height: 1.4;
+    position: relative;
+    word-wrap: break-word;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 0.75rem;
 
-  .q5 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+    p {
+      margin: 0;
+    }
 
-  .q6 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+    &.assistant {
+      background-color: #fffffd;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      color: #333;
+      overflow-x: auto;
+      @include horizontal-scroll;
 
-  .q7 {
-    width: 66.6666%;
+      & > p {
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 16px;
+      }
+    }
+
+    &.user {
+      background-color: #203b54;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+      color: #ffffff;
+
+      & > p {
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 16px;
+      }
+    }
+
+    &.loading {
+      background-color: #fffffd;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      color: #333;
+      overflow-x: auto;
+    }
   }
 }
 
 @media only screen and (max-width: 640px) {
-  .q1 {
-    width: 100%;
+  .chat-wall {
+    width: calc(100vw - 4rem);
   }
 
-  .q2 {
-    width: 100%;
+  .chat-wall-size {
+    padding-bottom: 5rem;
   }
 
-  .q3 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    font-family: "Arial", sans-serif;
   }
 
-  .q4 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  .bubble {
+    max-width: 100%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    line-height: 1.4;
+    position: relative;
+    word-wrap: break-word;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 0.75rem;
 
-  .q5 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    p {
+      margin: 0;
+    }
 
-  .q6 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+    &.assistant {
+      background-color: #fffffd;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      color: #333;
+      overflow-x: auto;
+      @include horizontal-scroll;
 
-  .q7 {
-    width: 100%;
+      & > p {
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 16px;
+      }
+    }
+
+    &.user {
+      background-color: #203b54;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+      color: #ffffff;
+
+      & > p {
+        font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 16px;
+      }
+    }
+
+    &.loading {
+      background-color: #fffffd;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      color: #333;
+      overflow-x: auto;
+    }
   }
+}
+
+.fill-spinner {
+  fill: #203b54;
 }

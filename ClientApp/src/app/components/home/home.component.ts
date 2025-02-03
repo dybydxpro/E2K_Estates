@@ -3,8 +3,8 @@ import {
   UntypedFormGroup,
   UntypedFormBuilder,
   Validators,
-  FormsModule, 
-  ReactiveFormsModule
+  FormsModule,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Message } from './../../models/message';
@@ -26,11 +26,13 @@ import { ChatViewComponent } from './chat-view/chat-view.component';
 @Component({
   selector: 'app-home',
   imports: [
-    SharedModule, 
+    SharedModule,
     CommonModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
-    MsgBoxComponent],
+    MsgBoxComponent,
+    ChatViewComponent
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -64,43 +66,23 @@ export class HomeComponent {
     this.questions = [
       {
         id: 1,
-        question:
-          'Question 1',
-        config: [
-          { forcus: 'condition', value: 'Used' },
-          { forcus: 'type', value: 'Hatchback' },
-          { forcus: 'budget', value: 'Below $20,000' },
-          { forcus: 'fuelType', value: 'Any fuel' },
-        ],
+        question: 'Question 1',
+        config: [],
       },
       {
         id: 2,
-        question: "Question 2",
-        config: [
-          { forcus: 'fuelType', value: 'Electric' },
-          { forcus: 'budget', value: '$20,000 - $40,000' },
-        ],
+        question: 'Question 2',
+        config: [],
       },
       {
         id: 3,
         question: 'Question 3',
-        config: [
-          { forcus: 'type', value: 'Hatchback' },
-          { forcus: 'budget', value: '$20,000 - $40,000' },
-          { forcus: 'fuelType', value: 'Hybrid' },
-          { forcus: 'fuelType', value: 'Electric' },
-          { forcus: 'seating', value: '4 seats' },
-          { forcus: 'purpose', value: 'Daily commuting' },
-        ],
+        config: [],
       },
       {
         id: 4,
-        question:
-          'Question 4',
-        config: [
-          { forcus: 'type', value: 'SUV' },
-          { forcus: 'purpose', value: 'Family activities & Road Trips' },
-        ],
+        question: 'Question 4',
+        config: [],
       },
     ];
   }

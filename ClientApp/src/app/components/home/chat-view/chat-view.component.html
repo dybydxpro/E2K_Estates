@@ -1,244 +1,41 @@
-<div class="form">
-  <h1 class="text-xl font-bold">Please answer to this questions.</h1>
-  <br />
-  <form action="" [formGroup]="reqForm">
-    <!-- <div class="relative mb-6">
-      <h3 class="font-sans text-base">
-        <strong>Question 1: </strong>New or Used car?
-      </h3>
-      <ul
-        class="items-center q1 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg grid grid-cols-2 my-3"
-      >
-        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
-          <div class="flex items-center ps-3">
-            <input
-              type="radio"
-              value="New"
-              formControlName="condition"
-              class="w-4 h-4 accent-yellow-500 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 focus:ring-2"
-            />
-            <label
-              for=""
-              class="w-full accent-yellow-500 py-3 ms-2 text-sm font-medium text-gray-900"
-              >New</label
-            >
-          </div>
-        </li>
-        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
-          <div class="flex items-center ps-3">
-            <input
-              type="radio"
-              value="Used"
-              formControlName="condition"
-              class="w-4 h-4 accent-yellow-500 bg-gray-100 border-gray-300 focus:ring-yellow-500 focus:ring-2"
-            />
-            <label
-              for=""
-              class="w-full accent-yellow-500 py-3 ms-2 text-sm font-medium text-gray-900"
-              >Used</label
-            >
-          </div>
-        </li>
-      </ul>
+<div [ngClass]="{'chat-wall': true, 'chat-wall-size': !isViewForm}">
+  <div class="chat-container">
+    @for (msg of messages; track $index) { @switch (msg.ownerType) { @case (1) {
+    <div class="bubble assistant">
+      <app-system-response-view [res]="msg.text" [config]="config"></app-system-response-view>
     </div>
-    <div class="relative mb-6">
-      <h3 class="font-sans text-base">
-        <strong>Question 2: </strong>Vehicle brand and model the user likes?
-      </h3>
-      <div>
-        <input
-          type="text"
-          formControlName="brand"
-          class="q2 text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 my-3"
-          (change)="getBrands($event)"
-          (click)="getBrands($event)"
-          (input)="getBrands($event)"
-        />
-        @if (isvisibleBrand) {
-        <div
-          id="brand-autocompleate"
-          class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow q2 max-h-80 my-3 mx-2 overflow-y-auto absolute top-16 left-0"
+    } @case (2) {
+    <div class="bubble user">
+      <pre [innerHTML]="msg.text"></pre>
+    </div>
+    } } } @if(isLoading === true) {
+    <div class="bubble loading">
+      <div role="status">
+        <svg
+          aria-hidden="true"
+          class="inline w-8 h-8 text-gray-200 animate-spin fill-spinner"
+          viewBox="0 0 100 101"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <ul class="py-2 text-sm text-gray-700">
-            @for(brand of selectedBrand; track brand) {
-            <li
-              class="block px-4 py-2 hover:bg-yellow-500 hover:text-white text-base"
-              (click)="fillBrand(brand)"
-            >
-              {{ brand }}
-            </li>
-            }
-          </ul>
-        </div>
-        }
+          <path
+            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+            fill="currentColor"
+          />
+          <path
+            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+            fill="currentFill"
+          />
+        </svg>
+        <span class="sr-only">Loading...</span>
       </div>
+      <p class="pl-4 pt-1.5"><i>Waiting for response...</i></p>
     </div>
-    <div class="relative mb-6">
-      <h3 class="font-sans text-base">
-        <strong>Question 3: </strong>Vehicle category they are interested in?
-        Please specify the different categories so that the user can select the
-        one they want from a predefined listing.
-      </h3>
-      <ul
-        class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg grid q3 my-3"
-        formArrayName="type"
-      >
-        @for (type of types; track $index) {
-        <li
-          class="w-full py-6 border-b border-gray-200 sm:border-b h-36 sm:border-r"
-        >
-          <div class="flex items-center ps-3">
-            <input
-              type="checkbox"
-              [value]="type.name"
-              [formControlName]="$index"
-              class="w-4 h-4 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 focus:ring-2"
-            />
-            <label for="" class="px-2">
-              <div class="flex flex-col">
-                <img class="img" [src]="type.img" alt="" />
-                <p
-                  class="w-full py-3 ms-2 text-sm text-center font-medium text-gray-900"
-                >
-                  {{ type.name }}
-                </p>
-              </div>
-            </label>
-          </div>
-        </li>
-        }
-      </ul>
-    </div>
-    <div class="relative mb-6">
-      <h3 class="font-sans text-base">
-        <strong>Question 4: </strong>What is the budget for their vehicle?
-        Please specify budget ranges in AUD so that the user can select the one
-        they want from a predefined listing.
-      </h3>
-      <ul
-        class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg grid q4 my-3"
-      >
-        @for (budget of budgets; track $index) {
-        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
-          <div class="flex items-center ps-3">
-            <input
-              type="radio"
-              [value]="budget"
-              formControlName="budget"
-              class="w-4 h-4 accent-yellow-500 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 focus:ring-2"
-            />
-            <label
-              for=""
-              class="w-full accent-yellow-500 py-3 ms-2 text-sm font-medium text-gray-900"
-              >{{ budget }}</label
-            >
-          </div>
-        </li>
-        }
-      </ul>
-    </div>
-    <div class="relative mb-6">
-      <h3 class="font-sans text-base">
-        <strong>Question 5: </strong>Any preference for electric only, petrol
-        only or mix?
-      </h3>
-      <ul
-        formArrayName="fuelType"
-        class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg grid q5 my-3"
-      >
-        @for (fuel of fuels; track $index) {
-        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
-          <div class="flex items-center ps-3">
-            <input
-              type="checkbox"
-              [value]="fuel"
-              [formControlName]="$index"
-              class="w-4 h-4 accent-yellow-500 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 focus:ring-2"
-            />
-            <label
-              for=""
-              class="w-full accent-yellow-500 py-3 ms-2 text-sm font-medium text-gray-900"
-              >{{ fuel }}</label
-            >
-          </div>
-        </li>
-        }
-      </ul>
-    </div>
-    <div class="relative mb-6">
-      <h3 class="font-sans text-base">
-        <strong>Question 6: </strong>What is your seating requirement?
-      </h3>
-      <ul
-        class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg grid q6 my-3"
-      >
-        @for (seat of seatCount; track $index) {
-        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
-          <div class="flex items-center ps-3">
-            <input
-              type="radio"
-              [value]="seat"
-              formControlName="seating"
-              class="w-4 h-4 accent-yellow-500 text-yellow-600 bg-gray-100 border-gray-300 focus:ring-yellow-500 focus:ring-2"
-            />
-            <label
-              for=""
-              class="w-full accent-yellow-500 py-3 ms-2 text-sm font-medium text-gray-900"
-              >{{ seat }}</label
-            >
-          </div>
-        </li>
-        }
-      </ul>
-    </div>
-    <div class="relative mb-6">
-      <h3 class="font-sans text-base">
-        <strong>Question 7: </strong>What is intended purpose of the vehicle?
-        Please specify the different categories so that the user can select the
-        one they want from a predefined listing.
-      </h3>
-      <input
-        type="text"
-        formControlName="purpose"
-        class="block p-2.5 q7 text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-        (change)="getPerpuses($event)"
-        (click)="getPerpuses($event)"
-        (input)="getPerpuses($event)"
-      />
-      @if (isvisiblePurpose) {
-      <div
-        id="purpose-autocompleate"
-        class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow q7 max-h-80 my-3 mx-2 absolute top-16 left-0"
-      >
-        <ul class="py-2 text-sm text-gray-700">
-          @for(purpose of selectedPurpose; track purpose){
-          <li
-            class="block px-4 py-2 hover:bg-yellow-500 hover:text-white text-base"
-            (click)="fillPurpose(purpose)"
-          >
-            {{ purpose }}
-          </li>
-          }
-        </ul>
+    }
+    @if(isViewForm === true){
+      <div class="bubble user-form">
+        <app-requrements-form [config]="config" (submitPrompt)="submit($event)"></app-requrements-form>
       </div>
-      }
-    </div> -->
-
-    <div class="flex mt-4">
-      <button
-        type="button"
-        (click)="initForm()"
-        class="text-gray-900 bg-white hover:bg-gray-100 focus:outline-none focus:ring-4 border border-gray-200 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-2 w-full"
-      >
-        Reset
-      </button>
-      <button
-        type="button"
-        (click)="generateText()"
-        class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center m-2 w-full"
-      >
-        Submit
-      </button>
-    </div>
-  </form>
+    }
+  </div>
 </div>

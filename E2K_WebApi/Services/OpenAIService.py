@@ -1,4 +1,5 @@
 import json
+import base64
 import aiohttp
 from dotenv import load_dotenv
 import os
@@ -16,7 +17,7 @@ class OpenAIService():
         self.gptModelModel = os.getenv('OPENAI_MODEL', '')
         self.gptModelMaxTokens = int(os.getenv('OPENAI_MAX_TOKEN', 1000))
         self.gptTemperature = int(os.getenv('OPENAI_TEMPERATURE', 0))
-        self.apiKey = os.getenv('OPENAI_API_KEY', '')
+        self.apiKey = self.__base64_decode(os.getenv('OPENAI_API_KEY', ''))
 
     async def chat_bot(self, msg_list):
         try:
@@ -63,3 +64,10 @@ class OpenAIService():
             else:
                 msg_list.append({"role": 'user', "content": configResponseType + " " + message["text"]})
         return msg_list
+
+    def __base64_decode(self, encoded_text):
+        try:
+            decoded_bytes = base64.b64decode(encoded_text.encode("utf-8"))
+            return decoded_bytes.decode("utf-8")
+        except Exception as e:
+            return ""
