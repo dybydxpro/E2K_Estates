@@ -47,12 +47,12 @@
 
               @if (messages.length === 0 && isChatView == false) {
               <div class="flex lg:justify-center qestion_container lg:mb-4">
-                @for (item of questions; track item.id) {
+                <!-- @for (item of questions; track item.id) {
                 <app-msg-box
                   [data]="item"
                   (trigger)="selectConfig($event)"
                 ></app-msg-box>
-                }
+                } -->
               </div>
               } @else {
               <div class="flex lg:justify-center">

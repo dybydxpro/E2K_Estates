@@ -20,7 +20,7 @@ import CryptoJS from 'crypto-js';
 import { Msg } from './../../models/enum';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../_shared/shared.module';
-import { MsgBoxComponent } from './msg-box/msg-box.component';
+// import { MsgBoxComponent } from './msg-box/msg-box.component';
 import { ChatViewComponent } from './chat-view/chat-view.component';
 
 @Component({
@@ -30,7 +30,6 @@ import { ChatViewComponent } from './chat-view/chat-view.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MsgBoxComponent,
     ChatViewComponent
   ],
   templateUrl: './home.component.html',
