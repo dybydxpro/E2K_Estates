@@ -3,16 +3,13 @@ import base64
 import aiohttp
 from dotenv import load_dotenv
 import os
-
-configResponseType = """configResponseType"""
-
-gptInstructions = """gptInstructions"""
+from .GptScriptService import GptScriptService;
 
 load_dotenv()
 
-
 class OpenAIService():
     def __init__(self):
+        self.gptScriptService = GptScriptService()
         self.gptModelUrl = os.getenv('OPENAI_URL', '')
         self.gptModelModel = os.getenv('OPENAI_MODEL', '')
         self.gptModelMaxTokens = int(os.getenv('OPENAI_MAX_TOKEN', 1000))
@@ -57,12 +54,12 @@ class OpenAIService():
         msg_list = []
         for i, message in enumerate(messages):
             if i == 0:
-                msg_list.append({"role": 'system', "content": gptInstructions + " " + configResponseType})
+                msg_list.append({"role": 'system', "content": self.gptScriptService.getGptInstructions() + " " + self.gptScriptService.getConfigResponse()})
 
             if message["ownerType"] == 1:
                 msg_list.append({"role": 'system', "content": message["text"]})
             else:
-                msg_list.append({"role": 'user', "content": configResponseType + " " + message["text"]})
+                msg_list.append({"role": 'user', "content": self.gptScriptService.getConfigResponse() + " " + message["text"]})
         return msg_list
 
     def __base64_decode(self, encoded_text):
