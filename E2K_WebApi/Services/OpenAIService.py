@@ -3,6 +3,8 @@ import base64
 import aiohttp
 from dotenv import load_dotenv
 import os
+
+from .DomService import DomService
 from .GptScriptService import GptScriptService;
 
 load_dotenv()
@@ -10,6 +12,7 @@ load_dotenv()
 class OpenAIService():
     def __init__(self):
         self.gptScriptService = GptScriptService()
+        self.domService = DomService()
         self.gptModelUrl = os.getenv('OPENAI_URL', '')
         self.gptModelModel = os.getenv('OPENAI_MODEL', '')
         self.gptModelMaxTokens = int(os.getenv('OPENAI_MAX_TOKEN', 1000))
@@ -19,8 +22,8 @@ class OpenAIService():
     async def chat_bot(self, msg_list):
         try:
             res = await self.generate_gpt_response(msg_list)
-            # soup = await self.domService.update_dom(res.get('description'))
-            # res["description"] = str(soup)
+            soup = await self.domService.update_dom(res.get('description'))
+            res["description"] = str(soup)
             return res
         except Exception as err:
             raise err

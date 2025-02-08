@@ -49,7 +49,7 @@ export class HomeComponent {
   constructor(
     private fb: UntypedFormBuilder,
     private store: Store,
-    private openai: OpenAIService,
+    private openAIService: OpenAIService,
     private message: NzMessageService
   ) {
     this.store
@@ -88,7 +88,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.gptForm = this.fb.group({
-      prompt: [null, [Validators.required]],
+      prompt: ["", [Validators.required, Validators.minLength(1)]],
     });
   }
 
@@ -143,7 +143,7 @@ export class HomeComponent {
   }
 
   submitToGPT(): void {
-    this.openai.sendMessage(this.messages).subscribe(
+    this.openAIService.sendMessage(this.messages).subscribe(
       (res: any) => {
         this.responceToChat(Msg.System, JSON.stringify(res));
         this.isLoading = false;
@@ -181,7 +181,12 @@ export class HomeComponent {
 
   resetForm(): void {
     this.gptForm = this.fb.group({
-      prompt: [null, [Validators.required]],
+      prompt: ["", [Validators.required, Validators.minLength(1)]],
     });
+  }
+
+  handleEnterKey(event: any): void {
+    event.preventDefault();
+    this.submitPrompt();
   }
 }

@@ -31,7 +31,7 @@
               >
                 Welcome to
                 <span class="text-5xl font-sans ai-animation"
-                  >PropertyWise AI</span
+                  >EstateWise AI</span
                 >
                 <br />
                 @if(isChatView === false) {
@@ -81,7 +81,7 @@
             <form
               [formGroup]="gptForm"
               (ngSubmit)="submitPrompt()"
-              (keydown.enter)="submitPrompt()"
+              (keydown.enter)="handleEnterKey($event)"
             >
               <div class="prompt-area">
                 <textarea

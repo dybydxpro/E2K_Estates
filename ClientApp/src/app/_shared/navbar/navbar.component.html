@@ -6,7 +6,7 @@
       </div>
       <div class="company-name">
         <p class="text-lg font-semibold decoration-wavy margin-0 text-white">
-          PropertyWise AI
+          EstateWise AI
         </p>
       </div>
     </div>
@@ -14,9 +14,8 @@
     <div>
       <ul class="flex justify-between items-center">
         <li
-          data-modal-target="popup-modal"
-          data-modal-toggle="popup-modal"
           class="text-white px-3 cursor-pointer font-semibold hover:text-gray-200 hover:mb-0.5 duration-800 ease-in-out"
+          (click)="openClearChatModule()"
         >
           New Session
         </li>
@@ -25,17 +24,20 @@
   </div>
 </nav>
 
+@if(isOpenClearChatModule) {
 <div
-  id="popup-modal"
-  tabindex="-1"
-  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-full bg-gray-800/50"
+  (click)="closeClearChatModule()"
 >
-  <div class="relative p-4 w-full max-w-md max-h-full">
+  <div
+    class="relative p-4 w-full max-w-md max-h-full"
+    (click)="$event.stopPropagation()"
+  >
     <div class="relative bg-white rounded-lg shadow">
       <button
         type="button"
         class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-        data-modal-hide="popup-modal"
+        (click)="closeClearChatModule()"
       >
         <svg
           class="w-3 h-3"
@@ -78,14 +80,13 @@
         </p>
         <div class="flex">
           <button
-            data-modal-hide="popup-modal"
             type="button"
             class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-100 mr-3 w-6/12"
+            (click)="closeClearChatModule()"
           >
             Cancel
           </button>
           <button
-            data-modal-hide="popup-modal"
             type="button"
             (click)="newSession()"
             class="text-white hover:bg-gray-700 bg-black focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-lg text-sm items-center px-5 py-2.5 text-center w-6/12"
@@ -97,3 +98,4 @@
     </div>
   </div>
 </div>
+}

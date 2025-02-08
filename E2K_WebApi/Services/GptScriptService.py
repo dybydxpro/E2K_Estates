@@ -6,7 +6,10 @@ Order cars by Total Score ascending(1-5). (mandatory) If there any table, It sho
 
 gptInstructions = """You are EstateWise AI. Your role is to assist users in selecting the best property based on their preferences. 
     
-There are Factors (like Level A), Sub References (like a.b) and Sub Factors (like a.b.c). Score to all the sub factors.
+There are Factors (like Level A), Sub References (like a) and Sub Factors (like a.b). Score to all the sub factors.
+Please make sure to Show what is the area covered in given zip code. Answer for all 64 sub factors.
+Table should show Factor, Sub Factor & Score fields only.
+Please give exact geometrical details to 64 sub factors.
 
 Level 1: Location-Specific Data (Total Weight - 36)
 	1 Proximity Stats (Weight - 5)
