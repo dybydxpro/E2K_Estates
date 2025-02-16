@@ -1,0 +1,42 @@
+$time: 0.5s;
+$bg: transparent;
+$bg_hover: #ffffff;
+$clr: #ffffff;
+$clr_hover: #000000;
+$base-colour: #ffffff;
+$base-colour_hover: #000000;
+
+.msg-box {
+    border-radius: 0.75rem;
+    border: 2px solid #ffffff;
+    padding: 1rem;
+    width: 16rem;
+    height: 100%;
+    background-color: $bg;
+    transition: $time ease-in-out;
+
+    & > p {
+        color: $clr;
+        font-size: 16px;
+        transition: $time ease-in-out;
+    }
+
+    & > span {
+        font-size: 24px;
+        color: $base-colour;
+        margin-bottom: 0.5rem;
+        transition: $time ease-in-out;
+    }
+
+    &:hover {
+        background-color: $bg_hover;
+
+        & > p {
+            color: $clr_hover;
+        }
+
+        & > span {
+            color: $base-colour_hover;
+        }
+    }
+}

@@ -1,0 +1,130 @@
+<div #homePage class="page-content">
+  <div id="home" class="home-top-seg seg-height">
+    <div class="home-top-seg-mask">
+      <div
+        #pageBody
+        [ngClass]="{
+          'home-top-segment': true,
+          'home-height-with-textarea':
+            messages.length !== 0 || isChatView == true,
+          'home-height-without-textarea': messages.length === 0
+        }"
+      >
+        <div class="scroll-body">
+          <app-navbar (startSession)="newSession()"></app-navbar>
+
+          <div
+            [ngClass]="{
+              'home-top-seg-form': true,
+              'seg-form-with-data': messages.length > 0,
+              'seg-form-without-data': messages.length == 0
+            }"
+          >
+            <div class="">
+              <p
+                class="text-center font-medium text-white text-2xl py-8 sm:p-0"
+              >
+                Unlock the power of AI to help you find your perfect property.
+              </p>
+              <p
+                class="text-center font-extrabold text-white text-4xl py-16 font-sans"
+              >
+                Welcome to
+                <span class="text-5xl font-sans ai-animation"
+                  >EstateWise AI</span
+                >
+                <br />
+                @if(isChatView === false) {
+                <button
+                  type="button"
+                  (click)="stratJourney()"
+                  class="py-2.5 px-5 mt-8 mb-2 text-2xl font-extrabold font-sans text-white focus:outline-none bg-transparent rounded-lg border border-gray-200 hover:bg-gray-100/25 focus:z-10 ring-white/25 focus:ring-4 focus:ring-offset-gray-100"
+                >
+                  let's start your journey
+                </button>
+                }
+              </p>
+
+              @if (messages.length === 0 && isChatView == false) {
+              <div class="flex lg:justify-center qestion_container lg:mb-4">
+                <!-- @for (item of questions; track item.id) {
+                <app-msg-box
+                  [data]="item"
+                  (trigger)="selectConfig($event)"
+                ></app-msg-box>
+                } -->
+              </div>
+              } @else {
+              <div class="flex lg:justify-center">
+                <app-chat-view
+                  [messages]="messages"
+                  [isLoading]="isLoading"
+                  [config]="selectedConfig"
+                  (submitPrompt)="submitPrompt($event)"
+                ></app-chat-view>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      @if(messages.length !== 0) {
+      <div
+        [ngClass]="{
+          'flex justify-center mx-auto': true,
+          'show-textarea': true
+        }"
+      >
+        <div>
+          <div class="flex w-full prompt-form">
+            <form
+              [formGroup]="gptForm"
+              (ngSubmit)="submitPrompt()"
+              (keydown.enter)="handleEnterKey($event)"
+            >
+              <div class="prompt-area">
+                <textarea
+                  type="text"
+                  id="search"
+                  class=""
+                  placeholder="Ask question..."
+                  formControlName="prompt"
+                  rows="2"
+                  autofocus
+                  required
+                ></textarea>
+                <div>
+                  <button class="submit-btn" type="submit">
+                    <span
+                      class=""
+                      nz-icon
+                      nzType="right-circle"
+                      nzTheme="fill"
+                    ></span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="nav-btn">
+  <span
+    nz-icon
+    nzType="double-right"
+    nzTheme="outline"
+    (click)="selectSegment('scroll-body', 'start')"
+  ></span>
+  <span
+    nz-icon
+    nzType="double-right"
+    nzTheme="outline"
+    (click)="selectSegment('scroll-body', 'end')"
+  ></span>
+</div>

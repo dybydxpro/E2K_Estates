@@ -1,18 +1,160 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url("./tailwind.css");
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+CL:wght@100..400&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+CL:wght@100..400&display=swap');
-
-html, body { 
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
-body { 
-    margin: 0;
-    overflow-x: hidden;
+body {
+  margin: 0;
+  overflow-x: hidden;
 }
 
 * {
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.html_doc {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: bold !important;
+    color: #36454f !important;
+  }
+
+  h1 {
+    font-size: 20px !important;
+    margin-bottom: 14px !important;
+  }
+
+  h2 {
+    font-size: 18px !important;
+    margin-bottom: 12px !important;
+  }
+
+  h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+
+  p {
+    margin-bottom: 8px !important;
+  }
+
+  table {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    margin-bottom: 16px !important;
+    border-radius: 1rem !important;
+    max-width: 68rem;
+  }
+
+  tr {
+    border-bottom-width: 1px;
+    width: 12rem;
+  }
+
+  th {
+    background-color: #f3f4f6 !important;
+    color: #6b7280 !important;
+    text-align: center !important;
+    padding: 1.25rem 1.5rem !important;
+    // text-wrap: nowrap;
+  }
+
+  td {
+    font-weight: 400 !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 1.25rem 1.25rem !important;
+
+    &:first-child {
+      font-weight: 600 !important;
+    }
+
+    & > img {
+      margin: auto;
+    }
+  }
+
+  ol {
+    list-style-type: decimal !important;
+    padding: 0 0 0 1.5rem !important;
+  }
+
+  ul {
+    list-style-type: disc !important;
+    padding: 0 0 0 1.5rem !important;
+  }
+
+  li {
+    font-weight: 400 !important;
+    margin-bottom: 12px !important;
+  }
+
+  img {
+    max-height: 10rem;
+    max-width: 10rem;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    border-radius: 0.875rem !important;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  .checked {
+    color: #eab308 !important;
+  }
+
+  .low {
+    color: #ef4444 !important;
+  }
+
+  .medium {
+    color: #eab308 !important;
+  }
+
+  .high {
+    color: #22c55e !important;
+  }
+
+  .fa-star {
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 5px;
+    color: #d1d5db;
+  }
+
+  .apexcharts-title-text {
+    font-weight: 500 !important;
+  }
+}
+
+// scroll bar
+@media only screen and (min-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 6px;
+    border: 0px solid #ffffff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #000000; // #eab308;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0e0e0e; // #a16207;
+  }
 }

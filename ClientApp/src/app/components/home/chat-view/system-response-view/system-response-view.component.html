@@ -1,0 +1,21 @@
+<div
+  [innerHTML]="textToHtmlText(phaseData(res, 'description'))"
+  #styledContainer
+></div>
+@if (phaseData(res, 'chart') !== null) {
+<div class="rounded-lg shadow-xl px-6 py-3">
+  <div #chartContainer class="chart-container"></div>
+  <div class="py-4 px-0">
+    @if (lableList.length !== 0) { @for (lable of lableList; track $index) {
+    <div class="grid grid-cols-7">
+      <p class="text-sm text-neutral-700 font-semibold col-span-2">
+        ({{ lable.short }}).
+      </p>
+      <p class="text-sm text-neutral-700 font-semibold col-span-5">
+        {{ lable.text }}
+      </p>
+    </div>
+    } }
+  </div>
+</div>
+}
