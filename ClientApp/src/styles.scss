@@ -64,13 +64,12 @@ body {
     color: #6b7280 !important;
     text-align: center !important;
     padding: 1.25rem 1.5rem !important;
-    // text-wrap: nowrap;
   }
 
   td {
     font-weight: 400 !important;
     justify-content: center !important;
-    text-align: center !important;
+    text-align: left !important;
     padding: 1.25rem 1.25rem !important;
 
     &:first-child {
