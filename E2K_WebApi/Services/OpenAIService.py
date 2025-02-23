@@ -22,8 +22,8 @@ class OpenAIService():
     async def chat_bot(self, msg_list):
         try:
             res = await self.generate_gpt_response(msg_list)
-            # soup = await self.domService.update_dom(res.get('description'))
-            # res["description"] = str(soup)
+            soup = await self.domService.update_dom(res.get('description'))
+            res["description"] = str(soup)
             return res
         except Exception as err:
             raise err
