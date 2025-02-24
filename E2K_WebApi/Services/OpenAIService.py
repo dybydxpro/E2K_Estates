@@ -48,10 +48,10 @@ class OpenAIService():
                     response.raise_for_status()
                     response_data = await response.json()
                     res = response_data["choices"][0]["message"]["content"]
-                    return json.loads(res.replace("\n", "").replace("ngmodel", "ngModel"))
+                    return json.loads(res.replace("ngmodel", "ngModel").strip())
         except Exception as err:
-            print(err)
-            raise err
+            print(str(err))
+            raise str(err)
 
     def __generate_msg_list(self, messages):
         msg_list = []
