@@ -1,0 +1,14 @@
+[Unit]
+Description=gunicorn daemon for EstateWiseAI (Production)
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/var/www/E2K_EstateWiseAI
+Environment=/var/www/E2K_EstateWiseAI/venv/bin
+ExecStart=/var/www/E2K_EstateWiseAI/venv/bin/python -m gunicorn --workers 3 --timeout 180 --bind 127.0.0.1:8002 E2K_Estates.wsgi:application
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

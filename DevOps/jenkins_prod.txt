@@ -1,0 +1,176 @@
+pipeline {
+    agent any
+
+    environment {
+        GITHUB_CREDENTIALS_ID = "git-credentials"
+        APP_NAME = 'EstateWise AI - Production'
+        APP_ROOT_DIR = "/var/www/E2K_EstateWiseAI"
+        APP_BUILD_DIR = "/var/www/E2K_EstateWiseAI_Build"
+    }
+
+    stages {
+        stage('Ensure Build Directory Exists') {
+            steps {
+                sh """
+                if [ ! -d "${env.APP_BUILD_DIR}" ]; then
+                    mkdir ${env.APP_BUILD_DIR}
+                fi
+                """
+            }
+        }
+        stage('Clean Directory') {
+            steps {
+                dir(env.APP_BUILD_DIR) {
+                    sh """
+                    if [ -d "E2K_Estates" ]; then
+                        rm -rf E2K_Estates
+                    fi
+                    """
+                }
+            }
+        }
+        stage("Check Versions") {
+            steps {
+                dir(env.APP_BUILD_DIR) {
+                    sh """
+                    git --version
+                    python3 --version
+                    pip3 --version
+                    node --version
+                    npm --version
+                    """
+                }
+            }
+        }
+        stage('Clone Github Repository') {
+            steps {
+                dir(env.APP_BUILD_DIR) {
+                    script {
+                        withCredentials([usernamePassword(
+                            credentialsId: GITHUB_CREDENTIALS_ID,
+                            usernameVariable: 'USERNAME',
+                            passwordVariable: 'PASSWORD'
+                        )]) {
+                            sh """
+                            git clone https://$USERNAME:$PASSWORD@github.com/dybydxpro/E2K_Estates.git
+                            cd E2K_Estates
+                            git checkout master
+                            """
+                        }
+                    }
+                }
+            }
+        }
+        stage('Install venv') {
+            steps {
+                dir("${env.APP_BUILD_DIR}/E2K_Estates") {
+                    sh """
+                    python3 -m venv venv
+                    """
+                }
+            }
+        }
+        stage('Install Python Dependencies') {
+            steps {
+                dir("${env.APP_BUILD_DIR}/E2K_Estates") {
+                    sh """
+                    ls -la
+                    bash -c '
+                    source venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                    python manage.py collectstatic --noinput
+                    deactivate
+                    '
+                    """
+                }
+            }
+        }
+        stage('Setup Backend') {
+            steps {
+                dir("${env.APP_BUILD_DIR}/E2K_Estates") {
+                    sh """
+                    mkdir staticfiles
+                    cp -r static/* staticfiles/
+                    """
+                }
+            }
+        }
+        stage('Install Node Modules') {
+            steps {
+                dir("${env.APP_BUILD_DIR}/E2K_Estates/ClientApp") {
+                    sh "npm install --legacy-peer-deps"
+                }
+            }
+        }
+        stage('Build Frontend') {
+            steps {
+                dir("${env.APP_BUILD_DIR}/E2K_Estates/ClientApp") {
+                    sh "npm run prod"
+                }
+            }
+        }
+        stage('Merge Frontend with Backend') {
+            steps {
+                dir("${env.APP_BUILD_DIR}/E2K_Estates") {
+                    sh "cp -r ClientApp/dist/clientapp/browser/* staticfiles/"
+                }
+            }
+        }
+        stage('Remove Fronend App') {
+            steps {
+                dir("${env.APP_BUILD_DIR}/E2K_Estates") {
+                    sh "rm -rf ClientApp"
+                }
+            }
+        }
+        stage('Delete Previous Artifact') {
+            steps {
+                sh "rm -rf ${APP_ROOT_DIR}"
+            }
+        }
+        stage('Setup New Artifact') {
+            steps {
+                dir("${env.APP_BUILD_DIR}/E2K_Estates") {
+                    sh """
+                    mkdir ${env.APP_ROOT_DIR}
+                    mv ./* ${env.APP_ROOT_DIR}
+                    """
+                }
+            }
+        }
+        stage('Set file permitions') {
+            steps {
+                sh """
+				sudo chmod 775 ${APP_ROOT_DIR}
+                sudo chown root:root ${APP_ROOT_DIR}
+                """
+            }
+        }
+        stage('Setup Env') {
+            steps {
+                dir(env.APP_ROOT_DIR) {
+                    sh """
+                    cp example.env .env
+                    """
+                }
+            }
+        }
+        stage('Restart Services') {
+            steps {
+                sh """
+                sudo systemctl restart gunicorn_estatewise
+                sudo systemctl restart nginx
+                """
+            }
+        }
+    }
+    post {
+        success {
+            echo "${env.APP_NAME} project successfully deployed!"
+        }
+        failure {
+            echo "${env.APP_NAME} - Pipeline failed. Check logs for errors."
+        }
+    }
+}
